@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +13,7 @@ int main(void)
 	clock_t start, end; // объявляем переменные для определения времени выполнения
 
 	start =  clock();
-	int i=0, j=0, r, n = 400, m = 400;
+	int i=0, j=0, r, n = 1000, m = 1000;
 	int elem_c;
 	int **a, **b, **c;
 
@@ -70,7 +69,7 @@ int main(void)
 	free(c);
 	end = clock();
 	float diff = (end - start) / 1000;
-	cout << "Vremya = " << diff << endl; 
+	cout << "Time in seconds = " << diff << endl; 
 
 	system("pause");
 	return(0);
