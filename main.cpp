@@ -12,7 +12,7 @@ int main(void)
 	setvbuf(stdout, NULL, _IONBF, 0);
 	clock_t start, end; // объявляем переменные для определения времени выполнения
 
-	start =  clock();
+	start =  clock(); // старт таймера
 	int i=0, j=0, r, n = 1000, m = 1000;
 	int elem_c;
 	int **a, **b, **c;
@@ -67,12 +67,10 @@ int main(void)
 	free(a);
 	free(b);
 	free(c);
-	end = clock();
+	end = clock(); // остановка таймера
 	float diff = (end - start) / 1000;
 	cout << "Time in seconds = " << diff << endl; 
 
 	system("pause");
 	return(0);
 }
-// O(N^2) + O(N^2) + O(N^3) = O(N^7)
-// O(N^3)
