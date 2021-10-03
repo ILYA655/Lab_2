@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -6,8 +7,7 @@
 #include <malloc.h>
 using namespace std;
 
-int main(void)
-{
+int mltp(){
 	setvbuf(stdin, NULL, _IONBF, 0);
 	setvbuf(stdout, NULL, _IONBF, 0);
 	clock_t start, end; // объявляем переменные для определения времени выполнения
@@ -68,9 +68,72 @@ int main(void)
 	free(b);
 	free(c);
 	end = clock(); // остановка таймера
-	float diff = (end - start) / 1000;
-	cout << "Time in seconds = " << diff << endl; 
+	float diff = (end - start) / 1000000;
+	cout << "Time in ms = " << diff << endl;
+	system("pause");
+	return(0);
+}
 
+void shell(int items[], int count){
+	int i, j, gap, k;
+	int x, a[5];
+	a[0]=9; a[1]=5; a[2]=3; a[3]=2; a[4]=1;
+	for(k=0; k < 5; k++) {
+		gap = a[k];
+		for(i=gap; i < count; ++i) {
+			x = items[i];
+			for(j=i-gap; (x < items[j]) && (j > 0); j=j-gap)
+				items[j+gap] = items[j];
+				items[j+gap] = x;
+		}
+	}
+}
+
+void qs(int items[], int left, int right){ //вызов функции: qs(items, 0, count-1);
+	int i, j;
+	int x, y;
+
+	i = left; j = right;
+	/* выбор компаранда */
+	x = items[(left+right)/2];
+	do {
+		while((items[i] < x) && (i < right)) i++;
+		while((x < items[j]) &&(j > left)) j--;
+		if(i <= j) {
+			y = items[i];
+			items[i] = items[j];
+			items[j] = y;
+		i++; j--;
+		}
+	} while(i <= j);
+	if(left < j) qs(items, left, j);
+	if(i < right) qs(items, i, right);
+}
+
+int main(){
+	setlocale(LC_ALL, "Russian");
+	clock_t start, end;
+	mltp();
+	int count;
+	ofstream fout;
+	fout.open("cppstudio.txt");
+	cout << "Введите размер: \n";
+	fout << "Введите размер: \n";
+	cin >> count;
+	fout << count;
+	fout.close();
+	int *items;
+	items = (int*)malloc(count * sizeof(int));
+	//cout << "Time in seconds = " << diff << endl;
+	start =  clock(); // старт таймера
+	shell(items, count);
+	float diff1 = (end - start) / 1000000;
+	cout << "Time in ms = " << diff1 << endl;
+	start =  clock(); // старт таймера
+	qs(items, 0, count -1);
+	end = clock(); // остановка таймера
+	float diff2 = (end - start) / 1000000;
+	cout << "Time in ms = " << diff2 << endl;
 	system("pause");
 	return(0);
 }
