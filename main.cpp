@@ -13,7 +13,7 @@ int mltp(){
 	clock_t start, end; // объявляем переменные для определения времени выполнения
 
 	start =  clock(); // старт таймера
-	int i=0, j=0, r, n = 1000, m = 1000;
+	int i=0, j=0, r, n = 100, m = 100;
 	int elem_c;
 	int **a, **b, **c;
 
@@ -68,7 +68,7 @@ int mltp(){
 	free(b);
 	free(c);
 	end = clock(); // остановка таймера
-	float diff = (end - start) / 1000000;
+	float diff = (end - start) / 1000;
 	cout << "Time in ms = " << diff << endl;
 	system("pause");
 	return(0);
@@ -110,6 +110,10 @@ void qs(int items[], int left, int right){ //вызов функции: qs(items
 	if(i < right) qs(items, i, right);
 }
 
+int compare(const void *x1, const void *x2){
+	return ( *(int*)x1 - *(int*)x2 );
+}
+
 int main(){
 	setlocale(LC_ALL, "Russian");
 	clock_t start, end;
@@ -118,22 +122,38 @@ int main(){
 	ofstream fout;
 	fout.open("cppstudio.txt");
 	cout << "Введите размер: \n";
-	fout << "Введите размер: \n";
+	
 	cin >> count;
-	fout << count;
+	fout << "	shell	qs	qsort\n";
+	fout << "/" << "\n";
+	fout << "\\" << "\n";
+	fout << "^" << "\n";
 	fout.close();
 	int *items;
 	items = (int*)malloc(count * sizeof(int));
+	for(int i = 0; i < count; i++){
+		items[i]=rand()% 100 + 1;
+		//cout << items[i] << "\n";
+	}
 	//cout << "Time in seconds = " << diff << endl;
 	start =  clock(); // старт таймера
 	shell(items, count);
-	float diff1 = (end - start) / 1000000;
+	end = clock(); // остановка таймера
+	float diff1 = (end - start) / 1000;
+	
 	cout << "Time in ms = " << diff1 << endl;
 	start =  clock(); // старт таймера
 	qs(items, 0, count -1);
 	end = clock(); // остановка таймера
-	float diff2 = (end - start) / 1000000;
+	float diff2 = (end - start) / 1000;
 	cout << "Time in ms = " << diff2 << endl;
+	start =  clock(); // старт таймера
+	qsort(items, count, sizeof(int), compare);
+	end = clock(); // остановка таймера
+	float diff3 = (end - start) / 1000;
+	cout << "Time in ms = " << diff3 << endl;
+
+	//for(int ix = 0; ix < 6; ix++)
 	system("pause");
 	return(0);
 }
