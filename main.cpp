@@ -122,13 +122,8 @@ int main(){
 	ofstream fout;
 	fout.open("cppstudio.txt");
 	cout << "Введите размер: \n";
-	
 	cin >> count;
-	fout << "	shell	qs	qsort\n";
-	fout << "/" << "\n";
-	fout << "\\" << "\n";
-	fout << "^" << "\n";
-	fout.close();
+	
 	int *items;
 	items = (int*)malloc(count * sizeof(int));
 	for(int i = 0; i < count; i++){
@@ -139,21 +134,108 @@ int main(){
 	start =  clock(); // старт таймера
 	shell(items, count);
 	end = clock(); // остановка таймера
-	float diff1 = (end - start) / 1000;
-	
+	float diff1 = (end - start) / 1;
 	cout << "Time in ms = " << diff1 << endl;
 	start =  clock(); // старт таймера
 	qs(items, 0, count -1);
 	end = clock(); // остановка таймера
-	float diff2 = (end - start) / 1000;
+	float diff2 = (end - start) / 1;
 	cout << "Time in ms = " << diff2 << endl;
 	start =  clock(); // старт таймера
 	qsort(items, count, sizeof(int), compare);
 	end = clock(); // остановка таймера
-	float diff3 = (end - start) / 1000;
+	float diff3 = (end - start) / 1;
 	cout << "Time in ms = " << diff3 << endl;
+	for(int i = 0; i < count; i++){
+		items[i] = 0;
+		//cout << items[i] << "\n";
+	}
+	for(int i = 0; i < count; i++){
+		items[i] = 0 + i;
+		//cout << items[i] << "\n";
+	}
+	cout << "\n";
+	start =  clock(); // старт таймера
+	shell(items, count);
+	end = clock(); // остановка таймера
+	float diff4 = (end - start) / 1;
+	cout << "Time in ms = " << diff4 << endl;
+	start =  clock(); // старт таймера
+	qs(items, 0, count -1);
+	end = clock(); // остановка таймера
+	float diff5 = (end - start) / 1;
+	cout << "Time in ms = " << diff5 << endl;
+	start =  clock(); // старт таймера
+	qsort(items, count, sizeof(int), compare);
+	end = clock(); // остановка таймера
+	float diff6 = (end - start) / 1;
+	cout << "Time in ms = " << diff6 << endl;
 
+	for(int i = 0; i < count; i++){
+		items[i] = 1000;
+		//cout << items[i] << "\n";
+	}
+	for(int i = 0; i < count; i++){
+		items[i] = 1000 - i;
+		//cout << items[i] << "\n";
+	}
+	cout << "\n";
+	start =  clock(); // старт таймера
+	shell(items, count);
+	end = clock(); // остановка таймера
+	float diff7 = (end - start) / 1;
+	cout << "Time in ms = " << diff7 << endl;
+	start =  clock(); // старт таймера
+	qs(items, 0, count -1);
+	end = clock(); // остановка таймера
+	float diff8 = (end - start) / 1;
+	cout << "Time in ms = " << diff8 << endl;
+	start =  clock(); // старт таймера
+	qsort(items, count, sizeof(int), compare);
+	end = clock(); // остановка таймера
+	float diff9 = (end - start) / 1;
+	cout << "Time in ms = " << diff9 << endl;
+
+	for(int i = 0; i < count; i++){
+		items[i] = 0;
+		//cout << items[i] << "\n";
+	}
+	for(int i = 0; i < count; i++){
+		if(i < count/2){
+			items[i] = 0 + i;
+			//cout << items[i] << "\n";
+		}
+		else{
+			items[i] = count - i;
+			//cout << items[i] << "\n";
+		}
+	}
+	
+	cout << "\n";
+	start =  clock(); // старт таймера
+	shell(items, count);
+	end = clock(); // остановка таймера
+	float diff10 = (end - start) / 1;
+	
+	cout << "Time in ms = " << diff10 << endl;
+	start =  clock(); // старт таймера
+	qs(items, 0, count -1);
+	end = clock(); // остановка таймера
+	float diff11 = (end - start) / 1;
+	cout << "Time in ms = " << diff11 << endl;
+	start =  clock(); // старт таймера
+	qsort(items, count, sizeof(int), compare);
+	end = clock(); // остановка таймера
+	float diff12 = (end - start) / 1;
+	cout << "Time in ms = " << diff12 << endl;
+
+	fout << "	   shell		qs		qsort\n";
+	fout << "/" << "	   " << diff4 << "		" << diff5 << "		" << diff6 << "\n";
+	fout << "\\"<< "	   " << diff7 << "		" << diff8 << "		" << diff9 << "\n";
+	fout << "^" << "	   " << diff10 << "		" << diff11 << "		" << diff12 << "\n";
+	fout << "rand" << "	   " << diff1 << "		" << diff2 << "		" << diff3 << "\n";
 	//for(int ix = 0; ix < 6; ix++)
+	fout.close();
 	system("pause");
 	return(0);
 }
