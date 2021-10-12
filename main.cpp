@@ -13,7 +13,7 @@ int mltp(){
 	clock_t start, end; // объявляем переменные для определения времени выполнения
 
 	start =  clock(); // старт таймера
-	int i=0, j=0, r, n = 100, m = 100;
+	int i=0, j=0, r, n = 4000, m = 4000;
 	int elem_c;
 	int **a, **b, **c;
 
@@ -68,7 +68,7 @@ int mltp(){
 	free(b);
 	free(c);
 	end = clock(); // остановка таймера
-	float diff = (end - start) / 1000;
+	float diff = (end - start) / 1;
 	cout << "Time in ms = " << diff << endl;
 	system("pause");
 	return(0);
@@ -120,7 +120,7 @@ int main(){
 	mltp();
 	int count;
 	ofstream fout;
-	fout.open("cppstudio.txt");
+	fout.open("result.txt");
 	int num = 0;
 	cout << "Введите количество наборов данных \n";
 	cin >> num;
@@ -139,17 +139,17 @@ int main(){
 		shell(items, count);
 		end = clock(); // остановка таймера
 		float diff1 = (end - start) / 1;
-		cout << "Time in ms = " << diff1 << endl;
+		cout << "Time in sec = " << diff1 << endl;
 		start =  clock(); // старт таймера
 		qs(items, 0, count -1);
 		end = clock(); // остановка таймера
 		float diff2 = (end - start) / 1;
-		cout << "Time in ms = " << diff2 << endl;
+		cout << "Time in sec = " << diff2 << endl;
 		start =  clock(); // старт таймера
 		qsort(items, count, sizeof(int), compare);
 		end = clock(); // остановка таймера
 		float diff3 = (end - start) / 1;
-		cout << "Time in ms = " << diff3 << endl;
+		cout << "Time in sec = " << diff3 << endl;
 		for(int i = 0; i < count; i++){
 			items[i] = 0;
 			//cout << items[i] << "\n";
@@ -163,17 +163,17 @@ int main(){
 		shell(items, count);
 		end = clock(); // остановка таймера
 		float diff4 = (end - start) / 1;
-		cout << "Time in ms = " << diff4 << endl;
+		cout << "Time in sec = " << diff4 << endl;
 		start =  clock(); // старт таймера
 		qs(items, 0, count -1);
 		end = clock(); // остановка таймера
 		float diff5 = (end - start) / 1;
-		cout << "Time in ms = " << diff5 << endl;
+		cout << "Time in sec = " << diff5 << endl;
 		start =  clock(); // старт таймера
 		qsort(items, count, sizeof(int), compare);
 		end = clock(); // остановка таймера
 		float diff6 = (end - start) / 1;
-		cout << "Time in ms = " << diff6 << endl;
+		cout << "Time in sec = " << diff6 << endl;
 
 		for(int i = 0; i < count; i++){
 			items[i] = 1000;
@@ -188,17 +188,17 @@ int main(){
 		shell(items, count);
 		end = clock(); // остановка таймера
 		float diff7 = (end - start) / 1;
-		cout << "Time in ms = " << diff7 << endl;
+		cout << "Time in sec = " << diff7 << endl;
 		start =  clock(); // старт таймера
 		qs(items, 0, count -1);
 		end = clock(); // остановка таймера
 		float diff8 = (end - start) / 1;
-		cout << "Time in ms = " << diff8 << endl;
+		cout << "Time in sec = " << diff8 << endl;
 		start =  clock(); // старт таймера
 		qsort(items, count, sizeof(int), compare);
 		end = clock(); // остановка таймера
 		float diff9 = (end - start) / 1;
-		cout << "Time in ms = " << diff9 << endl;
+		cout << "Time in sec = " << diff9 << endl;
 
 		for(int i = 0; i < count; i++){
 			items[i] = 0;
@@ -221,25 +221,23 @@ int main(){
 		end = clock(); // остановка таймера
 		float diff10 = (end - start) / 1;
 
-		cout << "Time in ms = " << diff10 << endl;
+		cout << "Time in sec = " << diff10 << endl;
 		start =  clock(); // старт таймера
 		qs(items, 0, count -1);
 		end = clock(); // остановка таймера
 		float diff11 = (end - start) / 1;
-		cout << "Time in ms = " << diff11 << endl;
+		cout << "Time in sec = " << diff11 << endl;
 		start =  clock(); // старт таймера
 		qsort(items, count, sizeof(int), compare);
 		end = clock(); // остановка таймера
 		float diff12 = (end - start) / 1;
-		cout << "Time in ms = " << diff12 << endl;
+		cout << "Time in sec = " << diff12 << endl;
 
 		fout << "	   shell		qs		qsort\n";
 		fout << "/" << "	   " << diff4 << "		" << diff5 << "		" << diff6 << "\n";
 		fout << "\\"<< "	   " << diff7 << "		" << diff8 << "		" << diff9 << "\n";
 		fout << "^" << "	   " << diff10 << "		" << diff11 << "		" << diff12 << "\n";
-		fout << "rand" << "	   " << diff1 << "		" << diff2 << "		" << diff3 << "\n";
-		cout << "\n";
-		cout << "\n";
+		fout << "rand" << "	   " << diff1 << "		" << diff2 << "		" << diff3 << "\n\n";
 		count = 0;
 	}
 	fout.close();
